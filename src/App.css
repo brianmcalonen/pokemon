@@ -303,3 +303,7 @@ body {
   justify-content: space-around;
   width: 200px;
 }
+
+.hoverable-cell:hover {
+  background-color: lightblue;
+}
