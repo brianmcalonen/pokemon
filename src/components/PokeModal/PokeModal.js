@@ -6,6 +6,7 @@ import StatChart from "./StatChart";
 import PokeID from "./Details/PokeID";
 import Height from "./Details/Height";
 import Weight from "./Details/Weight";
+import Description from "./Details/Description";
 
 const PokeModal = ({ show, onHide, pokemon, onPrev, onNext }) => {
   console.log("pokemon", pokemon);
@@ -122,15 +123,10 @@ const PokeModal = ({ show, onHide, pokemon, onPrev, onNext }) => {
                   <PokeID pokemon={pokemon} />
                   <Height pokemon={pokemon} />
                   <Weight pokemon={pokemon} />
-
-                  <p>
-                    <b>Description: </b>
-                  </p>
-                  {loadingDescription ? (
-                    <p>Loading description...</p>
-                  ) : (
-                    <p>{pokemonDescription}</p>
-                  )}
+                  <Description
+                    loadingDescription={loadingDescription}
+                    pokemonDescription={pokemonDescription}
+                  />
                   <p>
                     <b>Types</b>
                   </p>
