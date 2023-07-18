@@ -9,6 +9,7 @@ import Weight from "./Details/Weight";
 import Description from "./Details/Description";
 import Types from "./Details/Types";
 import Abilities from "./Details/Abilities";
+import Moves from "./Details/Moves";
 
 const PokeModal = ({ show, onHide, pokemon, onPrev, onNext }) => {
   console.log("pokemon", pokemon);
@@ -131,19 +132,7 @@ const PokeModal = ({ show, onHide, pokemon, onPrev, onNext }) => {
                   />
                   <Types pokemon={pokemon} />
                   <Abilities pokemon={pokemon} />
-
-                  <p>
-                    <b>Moves</b>
-                  </p>
-                  <ul>
-                    {pokemon.moves
-                      .map((move, index) => {
-                        return (
-                          <li key={index}>{toTitleCase(move.move.name)}</li>
-                        );
-                      })
-                      .slice(0, 5)}
-                  </ul>
+                  <Moves pokemon={pokemon} />
                 </div>
               )}
             </div>
