@@ -1,16 +1,12 @@
 import React from "react";
 
-const Description = ({ loadingDescription, pokemonDescription }) => {
+const Description = ({ loading, pokemon }) => {
   return (
     <div>
       <p>
         <b>Description: </b>
       </p>
-      {loadingDescription ? (
-        <p>Loading description...</p>
-      ) : (
-        <p>{pokemonDescription}</p>
-      )}
+      {loading ? <p>Loading description...</p> : <p>{pokemon}</p>}
     </div>
   );
 };

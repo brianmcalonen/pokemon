@@ -123,14 +123,14 @@ const PokeModal = ({ show, onHide, pokemon, onPrev, onNext }) => {
             >
               {pokemon && (
                 <div>
+                  <Types pokemon={pokemon} />
                   <PokeID pokemon={pokemon} />
                   <Height pokemon={pokemon} />
                   <Weight pokemon={pokemon} />
                   <Description
-                    loadingDescription={loadingDescription}
-                    pokemonDescription={pokemonDescription}
+                    loading={loadingDescription}
+                    pokemon={pokemonDescription}
                   />
-                  <Types pokemon={pokemon} />
                   <Abilities pokemon={pokemon} />
                   <Moves pokemon={pokemon} />
                 </div>
