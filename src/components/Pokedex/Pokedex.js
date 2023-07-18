@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import PokeModal from "../PokeModal/PokeModal";
+import Loading from "../Loading";
 
 export const Pokedex = () => {
   const [pokemonData, setPokemonData] = useState([]);
@@ -109,16 +110,16 @@ export const Pokedex = () => {
 
   return (
     <>
-      <div style={{ textAlign: "center" }}>
-        <img src="/Pokemon_Logo.jpg" alt="Pokemon logo" />
-      </div>
-
       {loading ? (
-        <p>Loading...</p>
+        // <p>Loading...</p>
+        <Loading />
       ) : error ? (
         <p>Error: {error}</p>
       ) : (
         <div>
+          <div style={{ textAlign: "center" }}>
+            <img src="/Pokemon_Logo.jpg" alt="Pokemon logo" />
+          </div>
           <table style={tableStyle}>
             <tbody>
               {Array.from({ length: Math.ceil(pokemonData.length / 10) }).map(

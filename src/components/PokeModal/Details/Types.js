@@ -28,7 +28,7 @@ const Types = ({ pokemon }) => {
           );
         })}
       </div>
-      <br />
+      <p />
     </div>
   );
 };
