@@ -19,7 +19,24 @@ export const Pokedex = () => {
   const [searchValue, setSearchValue] = useState("");
 
   const handleSearchChange = (event) => {
-    setSearchValue(event.target.value);
+    setSearchValue(event.target.value.trim());
+  };
+
+  const handleSearchButtonClick = async () => {
+    const searchTerm = searchValue.replace(/\s+/g, "").toLowerCase();
+    try {
+      setLoading(true);
+      const response = await axios.get(
+        `https://pokeapi.co/api/v2/pokemon/${searchTerm}`
+      );
+      const flavorText = await fetchFlavorText(searchTerm);
+      setSelectedPokemon({ ...response.data, flavor_text: flavorText });
+      setShowModal(true);
+    } catch (err) {
+      setError(`No pokemon found with the name "${searchValue}".`);
+    } finally {
+      setLoading(false);
+    }
   };
 
   const fetchData = async (url) => {
@@ -105,10 +122,6 @@ export const Pokedex = () => {
     fetchPokemon();
   }, [pokemonId]);
 
-  const filteredPokemon = pokemonData.filter((pokemon) =>
-    pokemon.name.toLowerCase().includes(searchValue.toLowerCase())
-  );
-
   return (
     <>
       {loading ? (
@@ -122,14 +135,17 @@ export const Pokedex = () => {
             <img src="/Pokemon_Logo.jpg" alt="Pokemon logo" />
           </div>
 
-          <SearchBar />
+          <SearchBar
+            onSearchValueChange={handleSearchChange}
+            onSearchButtonClick={handleSearchButtonClick}
+          />
 
           <table style={tableStyle}>
             <tbody>
               {Array.from({ length: Math.ceil(pokemonData.length / 10) }).map(
                 (_, rowIndex) => (
                   <tr key={rowIndex}>
-                    {filteredPokemon
+                    {pokemonData
                       .slice(rowIndex * 10, (rowIndex + 1) * 10)
                       .map((pokemon) => (
                         <td
