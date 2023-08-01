@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import PokeModal from "../PokeModal/PokeModal";
 import Loading from "../Loading";
+import SearchBar from "../SearchBar";
 
 export const Pokedex = () => {
   const [pokemonData, setPokemonData] = useState([]);
@@ -120,6 +121,9 @@ export const Pokedex = () => {
           <div style={{ textAlign: "center" }}>
             <img src="/Pokemon_Logo.jpg" alt="Pokemon logo" />
           </div>
+
+          <SearchBar />
+
           <table style={tableStyle}>
             <tbody>
               {Array.from({ length: Math.ceil(pokemonData.length / 10) }).map(
