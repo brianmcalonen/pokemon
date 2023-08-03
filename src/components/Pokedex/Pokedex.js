@@ -18,6 +18,20 @@ export const Pokedex = () => {
   const [prevPageUrl, setPrevPageUrl] = useState();
   const [searchValue, setSearchValue] = useState("");
 
+  const [pokemonNames, setPokemonNames] = useState([]);
+
+  useEffect(() => {
+    axios
+      .get("https://pokeapi.co/api/v2/pokemon?limit=1281")
+      .then((response) => {
+        const names = response.data.results.map((pokemon) => pokemon.name);
+        setPokemonNames(names);
+      })
+      .catch((error) => {
+        console.error("Error fetching data: ", error);
+      });
+  }, []);
+
   const handleSearchChange = (event) => {
     setSearchValue(event.target.value.trim());
   };
@@ -84,7 +98,6 @@ export const Pokedex = () => {
     setSelectedPokemon(pokemon);
     setPokemonId(pokemon.id);
     const flavorText = await fetchFlavorText(pokemon.name);
-    // assuming selectedPokemon is an object
     setSelectedPokemon((prev) => ({ ...prev, flavor_text: flavorText }));
     setShowModal(true);
   };
@@ -138,6 +151,7 @@ export const Pokedex = () => {
           <SearchBar
             onSearchValueChange={handleSearchChange}
             onSearchButtonClick={handleSearchButtonClick}
+            pokemonNames={pokemonNames}
           />
 
           <table style={tableStyle}>

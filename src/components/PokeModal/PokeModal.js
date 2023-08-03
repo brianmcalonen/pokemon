@@ -12,7 +12,7 @@ import Abilities from "./Details/Abilities";
 import Moves from "./Details/Moves";
 
 const PokeModal = ({ show, onHide, pokemon, onPrev, onNext }) => {
-  console.log("pokemon", pokemon);
+  // console.log("pokemon", pokemon);
 
   const [loadingDescription, setLoadingDescription] = useState(false);
   const [pokemonDescription, setPokemonDescription] = useState("");
