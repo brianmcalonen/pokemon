@@ -49,8 +49,10 @@ const SearchBar = ({
                 className="dropdown-item"
                 key={name}
                 onClick={() => {
-                  setSearchValue(name);
+                  const selectedName = name;
+                  setSearchValue(selectedName);
                   setAutoCompleteList([]);
+                  onSearchValueChange({ target: { value: selectedName } });
                 }}
               >
                 {capitalizeFirstLetter(name)}
