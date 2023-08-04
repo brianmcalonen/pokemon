@@ -13,10 +13,10 @@ const SearchBar = ({
     setSearchValue(e.target.value);
     onSearchValueChange(e);
 
-    // filter the list of pokemon names based on search value
     const filteredNames = pokemonNames.filter((name) =>
-      name.toLowerCase().includes(e.target.value.toLowerCase())
+      name.toLowerCase().startsWith(e.target.value.toLowerCase())
     );
+
     setAutoCompleteList(filteredNames);
   };
 
