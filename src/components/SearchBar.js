@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from "react";
-import axios from "axios";
+import React, { useState } from "react";
 
 const SearchBar = ({
   onSearchValueChange,
@@ -20,33 +19,46 @@ const SearchBar = ({
     setAutoCompleteList(filteredNames);
   };
 
-  return (
-    <div
-      style={{ display: "flex", justifyContent: "center", marginTop: "50px" }}
-    >
-      <input
-        value={searchValue}
-        onChange={handleSearchInputChanges}
-        type="text"
-      />
-      <input onClick={onSearchButtonClick} type="submit" value="SEARCH" />
+  const capitalizeFirstLetter = (string) => {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+  };
 
-      {/* Show autocomplete dropdown if searchValue is not empty */}
-      {searchValue && (
-        <div className="autocomplete-dropdown">
-          {autoCompleteList.map((name) => (
-            <div
-              key={name}
-              onClick={() => {
-                setSearchValue(name);
-                setAutoCompleteList([]);
-              }}
-            >
-              {name}
-            </div>
-          ))}
+  return (
+    <div className="poke-container">
+      <div className="search-container">
+        <div className="search-bar">
+          <input
+            className="search-input"
+            value={searchValue}
+            onChange={handleSearchInputChanges}
+            type="text"
+            placeholder="Search Pokemon"
+          />
+          <input
+            className="search-button"
+            onClick={onSearchButtonClick}
+            type="submit"
+            value="SEARCH"
+          />
         </div>
-      )}
+
+        {searchValue && autoCompleteList.length > 0 && (
+          <div className="autocomplete-dropdown">
+            {autoCompleteList.map((name) => (
+              <div
+                className="dropdown-item"
+                key={name}
+                onClick={() => {
+                  setSearchValue(name);
+                  setAutoCompleteList([]);
+                }}
+              >
+                {capitalizeFirstLetter(name)}
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
     </div>
   );
 };
