@@ -3,6 +3,7 @@ import axios from "axios";
 import PokeModal from "../PokeModal/PokeModal";
 import Loading from "../Loading";
 import SearchBar from "../SearchBar";
+import logo from "../../Pokemon_Logo.jpg";
 
 export const Pokedex = () => {
   const [pokemonData, setPokemonData] = useState([]);
@@ -138,14 +139,13 @@ export const Pokedex = () => {
   return (
     <>
       {loading ? (
-        // <p>Loading...</p>
         <Loading />
       ) : error ? (
         <p>Error: {error}</p>
       ) : (
         <div>
           <div style={{ textAlign: "center" }}>
-            <img src="/Pokemon_Logo.jpg" alt="Pokemon logo" />
+            <img src={logo} alt="Pokemon logo" />
           </div>
 
           <SearchBar
